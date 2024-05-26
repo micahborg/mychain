@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+import React from "react";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import { XRPProvider } from "./contexts/XrpContext";
+import { IPFSProvider } from "./contexts/IpfsContext";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <ChakraProvider>
+          <XRPProvider>
+            <IPFSProvider>
+              <Header />
+                {children}
+              <Footer />
+            </IPFSProvider>
+          </XRPProvider>
+      </ChakraProvider>
+      </body>
     </html>
   );
 }
