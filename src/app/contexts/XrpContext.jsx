@@ -28,10 +28,12 @@ export const XRPProvider = ({ children }) => {
           setCurrentWalletAddress(walletAddress);
         }
         window.ethereum.on("chainChanged", (chainId) => {
+          console.log("Chain changed to:", chainId);
           setCurrentChainId(chainId);
           window.location.reload();
         });
         window.ethereum.on("accountsChanged", (accounts) => {
+          console.log("Accounts changed to:", accounts);
           setWalletConnected(accounts.length > 0);
         });
       }
